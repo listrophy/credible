@@ -14,4 +14,8 @@ Gem::Specification.new do |gem|
   gem.name          = "credible"
   gem.require_paths = ["lib"]
   gem.version       = Credible::VERSION
+
+  gem.add_development_dependency 'guard-rspec'
+  gem.add_development_dependency 'pry'
+  gem.add_development_dependency 'rspec'
 end
