@@ -6,23 +6,25 @@ module Credible
 
     class << self
 
-      def encrypt object, key, iv = nil
+      def encrypt object, key64
         marshaled = Marshal.dump object
-        encrypted, iv = encipher(marshaled, key, iv)
-        [Base64.encode64(encrypted).strip, iv]
+        key = Base64.decode64(key64)
+
+        en64(*encipher(marshaled, key))
       end
 
-      def decrypt str, key, iv
-        cryptext = Base64.decode64(str)
+      def decrypt str64, key64, iv64
+        cryptext, key, iv = de64(str64, key64, iv64)
+
         marshaled = decipher(cryptext, key, iv)
         Marshal.load marshaled
       end
 
-      def encipher cleartext, key, iv = nil
-        encryptor = OpenSSL::Cipher.new('AES-256-CBC')
+      def encipher cleartext, key
+        encryptor = new_cipher
         encryptor.encrypt
 
-        iv = iv ? encryptor.iv = iv : encryptor.random_iv
+        iv = encryptor.random_iv
         encryptor.key = key
 
         encrypted = encryptor.update cleartext
@@ -32,12 +34,24 @@ module Credible
       end
 
       def decipher cryptext, key, iv
-        decryptor = OpenSSL::Cipher::Cipher.new('AES-256-CBC')
+        decryptor = new_cipher
         decryptor.decrypt
         decryptor.iv = iv
         decryptor.key = key
         plaintext = decryptor.update cryptext
         plaintext << decryptor.final
+      end
+
+      def en64 *args
+        args.map{|arg| Base64.encode64(arg).strip}
+      end
+
+      def de64 *args
+        args.map{|arg| Base64.decode64 arg}
+      end
+
+      def new_cipher
+        OpenSSL::Cipher::Cipher.new('AES-256-CBC')
       end
 
     end
