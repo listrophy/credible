@@ -5,7 +5,7 @@ require 'credible/lockbox'
 describe Credible::Lockbox do
   describe '#add_credential_set' do
     it 'adds the set using the name as key' do
-      bar = stub(name: 'foo')
+      bar = stub(:name => 'foo')
       subject.should_receive(:[]=).with('foo', bar)
       subject.add_credential_set(bar)
     end
@@ -13,9 +13,9 @@ describe Credible::Lockbox do
 
   describe '#list' do
     it 'returns a hash of credential_sets, sorted by name' do
-      set_a = stub(name: 'aaa')
-      set_b = stub(name: 'bbb')
-      set_c = stub(name: 'ccc')
+      set_a = stub(:name => 'aaa')
+      set_b = stub(:name => 'bbb')
+      set_c = stub(:name => 'ccc')
       subject.add_credential_set(set_c)
       subject.add_credential_set(set_a)
       subject.add_credential_set(set_b)
