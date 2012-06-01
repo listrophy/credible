@@ -44,7 +44,7 @@ describe Credible::SymmetricObjectEncryptor do
     end
     context 'when not passed a key' do
       it 'calls encipher without a key param' do
-        subject.should_receive(:encipher).with(marshalled_obj, nil)
+        subject.should_receive(:encipher).with(marshalled_obj, nil).and_return('')
         subject.encrypt(obj)
       end
     end
