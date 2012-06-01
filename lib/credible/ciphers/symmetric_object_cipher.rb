@@ -13,14 +13,14 @@ module Credible
           marshalled_obj = Marshal.dump(obj)
           key = key64 ? de64(key64) : nil
 
-          cryptext, key, iv = super(marshalled_obj, key)
+          ciphertext, key, iv = super(marshalled_obj, key)
 
-          en64(cryptext, key, iv)
+          en64(ciphertext, key, iv)
         end
 
-        def decrypt cryptext64, key64, iv64
-          cryptext, key, iv = de64(cryptext64, key64, iv64)
-          Marshal.load super(cryptext, key, iv)
+        def decrypt ciphertext64, key64, iv64
+          ciphertext, key, iv = de64(ciphertext64, key64, iv64)
+          Marshal.load super(ciphertext, key, iv)
         end
 
       end

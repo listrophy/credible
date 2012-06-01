@@ -19,12 +19,12 @@ module Credible
           [encrypted, key, iv]
         end
 
-        def decrypt cryptext, key, iv
+        def decrypt ciphertext, key, iv
           decryptor = new_cipher
           decryptor.decrypt
           decryptor.iv = iv
           decryptor.key = key
-          plaintext = decryptor.update cryptext
+          plaintext = decryptor.update ciphertext
           plaintext << decryptor.final
         end
 
