@@ -19,7 +19,14 @@ describe Credible::SymmetricObjectEncryptor do
   let(:iv64) { Base64.encode64(iv).strip }
   let(:key) { "A31E1?76fL9YB7J37A88ZHa'B22E4vFC" } # same here
   let(:key64) { Base64.encode64(key).strip }
-  let(:encrypted) { "Z\x16\x9F\xA5\xF6\x11d\"\xC9.\xDB\xA0Y\x8E\t\xD1\xB09\e~%\xA3\x85\fE\xBB\xE5\xC4\x064J\xB5" }
+  let(:encrypted) do
+    case RUBY_VERSION
+    when '1.8.7'
+      "Z\026\237\245\366\021d\"\311.\333\240Y\216\t\321\333\325\235\006\017\341l\225N\253\336\220\232S\247e"
+    else
+      "Z\x16\x9F\xA5\xF6\x11d\"\xC9.\xDB\xA0Y\x8E\t\xD1\xB09\e~%\xA3\x85\fE\xBB\xE5\xC4\x064J\xB5"
+    end
+  end
   let(:encrypted64) { Base64.encode64(encrypted).strip }
   let(:stubbed_aes) do
     stubbed_aes = OpenSSL::Cipher::Cipher.new('AES-256-CBC')
