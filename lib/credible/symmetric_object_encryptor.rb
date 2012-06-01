@@ -6,9 +6,9 @@ module Credible
 
     class << self
 
-      def encrypt object, key64
+      def encrypt object, key64 = nil
         marshaled = Marshal.dump object
-        key = Base64.decode64(key64)
+        key = key64 ? Base64.decode64(key64) : nil
 
         en64(*encipher(marshaled, key))
       end
@@ -20,17 +20,19 @@ module Credible
         Marshal.load marshaled
       end
 
-      def encipher cleartext, key
+
+
+      def encipher cleartext, key = nil
         encryptor = new_cipher
         encryptor.encrypt
 
         iv = encryptor.random_iv
-        encryptor.key = key
+        key = (key ?  encryptor.key = key : encryptor.random_key)
 
         encrypted = encryptor.update cleartext
         encrypted << encryptor.final
 
-        [encrypted, iv]
+        [encrypted, key, iv]
       end
 
       def decipher cryptext, key, iv
