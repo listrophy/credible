@@ -1,6 +1,7 @@
 # Credible
 
 Store credentials in your repository safely
+[![Build Status](https://secure.travis-ci.org/listrophy/credible.png?branch=pre-alpha)](http://travis-ci.org/listrophy/credible)
 
 ## A Word of Caution
 
