@@ -1,9 +1,9 @@
-require 'credible/symmetric_encryption/cryptex'
+require 'credible/ciphers/symmetric_cipher'
 require 'credible/base64_helper'
 
 module Credible
-  module SymmetricEncryption
-    class ObjectCryptex < Cryptex
+  module Ciphers
+    class SymmetricObjectCipher < SymmetricCipher
 
       class << self
 

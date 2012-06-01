@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-require 'credible/symmetric_encryption/object_cryptex'
+require 'credible/ciphers/symmetric_object_cipher'
 
-describe Credible::SymmetricEncryption::ObjectCryptex do
-  subject { Credible::SymmetricEncryption::ObjectCryptex }
+describe Credible::Ciphers::SymmetricObjectCipher do
+  subject { Credible::Ciphers::SymmetricObjectCipher }
 
   let(:obj) { Object.new }
   let(:marshalled_obj) { Marshal.dump obj }

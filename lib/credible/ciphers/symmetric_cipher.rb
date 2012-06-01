@@ -1,8 +1,8 @@
 require 'openssl'
 
 module Credible
-  module SymmetricEncryption
-    class Cryptex
+  module Ciphers
+    class SymmetricCipher
 
       class << self
 

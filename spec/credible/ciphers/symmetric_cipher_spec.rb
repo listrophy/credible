@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-require 'credible/symmetric_encryption/cryptex'
+require 'credible/ciphers/symmetric_cipher'
 
-describe Credible::SymmetricEncryption::Cryptex do
-  subject { Credible::SymmetricEncryption::Cryptex }
+describe Credible::Ciphers::SymmetricCipher do
+  subject { Credible::Ciphers::SymmetricCipher }
 
   let(:str) { 'this is my >16 char string' }
   let(:iv) { "fCK1L158ED}b00!3" } # not as random as usual: removed some \xNN chars for brevity
