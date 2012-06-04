@@ -5,8 +5,8 @@ require 'credible/ciphers/asymmetric_cipher'
 describe Credible::Ciphers::AsymmetricCipher do
   subject { Credible::Ciphers::AsymmetricCipher }
   let(:str) { 'this is mah string' }
-  let(:pub_key) { open(RSpec.root.join('fixtures', 'rsa_pub.pem')).read }
-  let(:priv_key) { open(RSpec.root.join('fixtures', 'rsa.pem')).read }
+  let(:pub_key) { open(RSpec.root.join('fixtures', 'rsa_pub.pem').to_s).read }
+  let(:priv_key) { open(RSpec.root.join('fixtures', 'rsa.pem').to_s).read }
 
   # unfortunately for testing, I can't figure out how to stub out the padding
   # mechanism to something deterministic. Perhaps that's not the worst thing
